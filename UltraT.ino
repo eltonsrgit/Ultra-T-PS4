@@ -5,19 +5,16 @@
 #include "ledFX.h"  // .h para efeitos de LED
 
 
-#define sensorReflex 14
+#define sensorReflex 34
 #define boot 0
 
-const int motor_esq_1 = 18;   //4
-const int motor_esq_2 = 19;  //27
-const int motor_dir_1 = 4;  //13
-const int motor_dir_2 = 23;  //14
 
+DRV8833 motor(18, 19, 4, 23);
 
-DRV8833 motor(motor_esq_1, motor_esq_2, motor_dir_1, motor_dir_2);
 #include "SeekAndDestroy.h"  // Função de busca e destruição
 #include "RCDualShock.h"
-#include "Linha.h"
+//#include "Linha.h"
+#include "RideTheLightning.h"
 
 
 SumoIR IR;
@@ -30,16 +27,20 @@ void setup(){
   pinMode(boot, INPUT_PULLUP);
   Serial.begin(115200);
   IR.begin(15);
-  PS4.begin("60:5b:b4:7e:74:a4");  // mac do meu ps4 "60:5b:b4:7e:74:a4"
+  PS4.begin("d8:08:31:2c:d7:e1");  // mac do meu ps4 "60:5b:b4:7e:74:a4"
   motor.begin();
   motor.bip(3, 200, 2000);
   pinMode(sensorReflex, INPUT);
   pinMode(leftIRpin, INPUT);
   pinMode(rightIRpin, INPUT);
-  pinMode(SensorE, INPUT);
-  pinMode(SensorD, INPUT);
+
+  pinMode(JsumoLeft, INPUT);
+  pinMode(JsumoRight, INPUT);
+
+  // pinMode(SensorE, INPUT);
+  // pinMode(SensorD, INPUT);
   pixels.begin();
-  pixels.setBrightness(100);
+  pixels.setBrightness(60);
   pixels.clear();
   ledLight(0, 0, 0);
   motor.stop();
@@ -103,8 +104,9 @@ void loop(){
       pixels.clear();
       ledLight(0, 150, 0);
       Serial.println("-> sumo on");
-      BackToDestroy();
-      //SeekAndDestroy();
+      //BackToDestroy();
+      SeekAndDestroy_L();
+      //Lightning();
       
       
 
@@ -112,12 +114,12 @@ void loop(){
       pixels.clear();
       motor.stop();
       Serial.println("-> sumo stop");
-      ledLight(150, 0, 0);
+      ledLight(150, 150, 0);
 
     } else {
       pixels.clear();
       motor.stop();
-      ledLight(150, 0, 0);
+      ledLight(200, 100, 0);
     }
   }
 }

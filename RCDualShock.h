@@ -30,7 +30,7 @@ if (!PS4.isConnected()) {
     Serial.print(vel_esq);
     Serial.print(" R: ");
     Serial.println(vel_dir);*/
-    int RS = map(PS4.RStickX(), -127, 127, -1024, 1024);
+    int RS = map(PS4.RStickX(), -127, 127, -950, 950);
 
     int R2 = map(PS4.R2Value(), 0, 255, 0, 1024);
     int L2 = map(PS4.L2Value(), 0, 255, 0, 1024);
