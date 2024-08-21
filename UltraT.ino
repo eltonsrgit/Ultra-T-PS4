@@ -1,15 +1,16 @@
 #include <PS4Controller.h>  // Biblioteca para controle DualShock
-#include "SumoIR.h"
-#include "DRV8833.h"
-#include "sensoresIR.h"
-#include "ledFX.h"  // .h para efeitos de LED
+#include "SumoIR.h"  // Biblioteca para os comandos do controle do juiz
+#include "DRV8833.h" // para a ponte h 
+#include "sensoresIR.h"  // para os sensores frontais
+#include "ledFX.h"  // para efeitos de LED
 
-#define boot 0
+#define boot 0 
+// botao 'boot' do ESP32, será utilizado para alternar entre modo auto e RC
 
 
-DRV8833 motor(18, 19, 4, 23);
+DRV8833 motor(18, 19, 4, 23); // (MotorEsquerdo1, MotorEsquerdo2, MotorDireito1, MotorDireito2)
 
-#include "SeekAndDestroy.h"  // Função de busca e destruição
+#include "SeekAndDestroy.h"  
 #include "RCDualShock.h"
 #include "WildSide.h"
 
