@@ -8,7 +8,7 @@
 // botao 'boot' do ESP32, será utilizado para alternar entre modo auto e RC
 
 
-DRV8833 motor(18, 19, 4, 23); // (MotorEsquerdo1, MotorEsquerdo2, MotorDireito1, MotorDireito2)
+//DRV8833 motor(18, 19, 4, 23); // (MotorEsquerdo1, MotorEsquerdo2, MotorDireito1, MotorDireito2)
 
 #include "SeekAndDestroy.h"  
 #include "RCDualShock.h"
@@ -25,7 +25,7 @@ void setup(){
   pinMode(boot, INPUT_PULLUP);
   Serial.begin(115200);
   IR.begin(15);
-  PS4.begin("9c:30:5b:fb:f4:58");  // mac do meu ps4 "60:5b:b4:7e:74:a4"  #### mac do pc "9c:30:5b:fb:f4:58"
+  PS4.begin("60:5b:b4:7e:74:a4");  // mac do meu ps4 "60:5b:b4:7e:74:a4"  #### mac do pc "9c:30:5b:fb:f4:58"
   motor.begin();
   motor.bip(5, 200, 2000);
   pinMode(leftIRpin, INPUT);
@@ -87,7 +87,7 @@ void loop(){
     if (IR.prepare()) {
 
       motor.stop();
-      ledLight(150, 150, 150);
+      ledLight(150, 0, 0);
       Serial.println("-> sumo prepare");
 
     } else if (IR.start()) {
@@ -111,12 +111,12 @@ void loop(){
       pixels.clear();
       motor.stop();
       Serial.println("-> sumo stop");
-      ledLight(150, 150, 0);
+      ledDetection();
 
     } else {
       pixels.clear();
       motor.stop();
-      ledLight(200, 100, 0);
+      ledDetection();
     }
   }
 }

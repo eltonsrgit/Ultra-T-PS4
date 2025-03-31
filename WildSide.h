@@ -4,12 +4,15 @@
 #include "sensoresIR.h"
 #include "DRV8833.h"
 #include "SeekAndDestroy.h"
+
 #define JsumoLeft 35
 #define JsumoRight 32
 
+int leftRay = 0;
+int rightRay = 0;
+
 bool EsqAtv, DirAtv;
 bool girando = false;
-
 
 enum soma {
   Esquerda = -1,
@@ -18,9 +21,13 @@ enum soma {
   Tudo
 };
 
-void WildSide(){
-  int leftRay = digitalRead(JsumoLeft);
-  int rightRay = digitalRead(JsumoRight);
+void lerSensores() {
+  leftRay = digitalRead(JsumoLeft);
+  rightRay = digitalRead(JsumoRight);
+}
+
+void WildSide() {
+  lerSensores();
   int reaction = -leftRay + rightRay;
 
   // Verifica se nenhum objeto foi detectado
@@ -30,8 +37,7 @@ void WildSide(){
     Serial.println("Avançando...");
   } else {
     // Se algo for detectado, faz as ações já definidas
-    switch (reaction){
-
+    switch (reaction) {
       case Esquerda:
         motor.move(-1023, 1023);
         EsqAtv = true;
@@ -39,7 +45,7 @@ void WildSide(){
         girando = true;
         Serial.println("Inimigo à Esquerda!");
         break;
-
+      
       case Direita:
         motor.move(1023, -1023);
         EsqAtv = false;
@@ -47,18 +53,14 @@ void WildSide(){
         girando = true;
         Serial.println("Inimigo à Direita!");
         break;
-
+      
       case Nada:
-        // if (girando && (LeftDetection() || RightDetection())){
-        //   girando = false;
-        //   motor.move(1023, 1023);
-        // }
         SeekAndDestroy_R();
         EsqAtv = false;
         DirAtv = false;
         Serial.println("Seek and Destroy?");
         break;
-
+      
       case Tudo:
         motor.stop();
         EsqAtv = true;

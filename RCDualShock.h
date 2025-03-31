@@ -40,9 +40,6 @@ if (!PS4.isConnected()) {
     int vel_esq = constrain(RS + (R2 - L2), -1024, 1024);
     int vel_dir = constrain(-RS + (R2 - L2), -1024, 1024);
 
-    while (PS4.Square()){
-      motor.move(-1023, -1023);
-    }
 
     motor.move(vel_esq, vel_dir);
     

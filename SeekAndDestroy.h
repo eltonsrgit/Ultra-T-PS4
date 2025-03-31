@@ -1,7 +1,8 @@
 #ifndef SeekAndDestroy_H
 #define SeekAndDestroy_H
 
-
+#include "DRV8833.h"
+DRV8833 motor(18, 19, 4, 23);
 int EstadoAtual;
 
 void EstadoUpdate(){  // função que atualiza os estados
