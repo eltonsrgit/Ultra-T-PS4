@@ -1,13 +1,13 @@
 #ifndef sensoresIR_H
 #define sensoresIR_H
 
-#define leftIRpin 33
-#define rightIRpin 25
+#define leftIRpin 35
+#define rightIRpin 34
 
 
 bool LeftDetection(){
   bool left_IR_read = digitalRead(leftIRpin);
-  if (left_IR_read == 1){
+  if (left_IR_read == 0){
     return false; // sem inimigo
   }
   else{
@@ -17,7 +17,7 @@ bool LeftDetection(){
 
 bool RightDetection(){
   bool right_IR_read = digitalRead(rightIRpin);
-  if (right_IR_read == 1){
+  if (right_IR_read == 0){
     return false; // sem inimigo
   }
   else{

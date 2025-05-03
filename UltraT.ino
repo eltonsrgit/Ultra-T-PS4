@@ -6,7 +6,7 @@
 
 #define boot 0 
 // botao 'boot' do ESP32, será utilizado para alternar entre modo auto e RC
-
+int strategy = 0;
 
 //DRV8833 motor(18, 19, 4, 23); // (MotorEsquerdo1, MotorEsquerdo2, MotorDireito1, MotorDireito2)
 
@@ -84,6 +84,8 @@ void loop(){
 
     IR.update();
 
+    
+    
     if (IR.prepare()) {
 
       motor.stop();
@@ -100,12 +102,21 @@ void loop(){
       ledLight(0, 150, 0);
       Serial.println("-> sumo on");
       
-      //SeekAndDestroy_L(); // O Ultra T gire em seu eixo até que encontre o inimigo, ao encontra-lo ele vai para cima e se ajusta se necessário
+      switch( strategy ){
+        case 4:
+          SeekAndDestroy_L();
+        break;
 
-      //SeekAndDesroy_R(); // acima L para girar pra esquerda, R para girar para direita
+        case 5:
+          SeekAndDestroy_R();
+        break;
 
-      WildSide(); // O Ultra T pode ser posicionado diagonalmente na arena, ele segue reto até que os sensores laterais encontrem o inimigo, executando a SeekAndDestroy em seguida (verifique WildSide.h para saber o sentido de giro da SeekAndDestroy para posiciona-lo corretamente na arena)
-      
+        case 6:
+          WildSide();
+        break;
+
+        // ... outras estratégias
+      }
 
     } else if (IR.stop()) {
       pixels.clear();
@@ -114,8 +125,14 @@ void loop(){
       ledDetection();
 
     } else {
-      pixels.clear();
-      motor.stop();
+     int cmd = IR.read();
+      if( cmd >= 4 && cmd <= 9 ){ // faixa de valores validos ( lembrando que 1, 2 e 3 são eservados pra start, stop e prepare)
+        strategy = cmd;
+        ledLight(100, 100, 255);
+        delay(80);
+        ledLight(0, 0, 0);
+        delay(80);
+      }
       ledDetection();
     }
   }

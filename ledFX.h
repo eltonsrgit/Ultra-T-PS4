@@ -3,10 +3,10 @@
 #include "sensoresIR.h"
 #include "WildSide.h"
 #include <Adafruit_NeoPixel.h>
-#define LED4 4
-#define LED5 5
-#define LED7 7
-#define LED1 1
+#define LED4 3
+#define LED5 4
+#define LED7 6
+#define LED1 0
 #define PIN 2 //pino do anel de leds
 #define NUMPIXELS 8 // quantidade de leds do anel
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800); // necessario

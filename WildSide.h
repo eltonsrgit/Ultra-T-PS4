@@ -5,7 +5,7 @@
 #include "DRV8833.h"
 #include "SeekAndDestroy.h"
 
-#define JsumoLeft 35
+#define JsumoLeft 33
 #define JsumoRight 32
 
 int leftRay = 0;
@@ -33,7 +33,7 @@ void WildSide() {
   // Verifica se nenhum objeto foi detectado
   if (reaction == Nada && !girando) {
     // Move para frente
-    motor.move(900, 900);
+    motor.move(-900, 900);
     Serial.println("Avançando...");
   } else {
     // Se algo for detectado, faz as ações já definidas
