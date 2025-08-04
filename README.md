@@ -30,7 +30,3 @@
 - MARROM: Alimentação 5V;
 - Azul: GND                                                                                
 ![image](https://github.com/user-attachments/assets/99f5d452-e4a5-4368-93ab-6d7e7bb192d1)
-
-
-# Ultima atualização:
-Domingo, 11 de Agosto de 2024. Para a competição da Rio Innovation Week.
