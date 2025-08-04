@@ -1,8 +1,10 @@
 #ifndef ledFX_H
-#define ledFX_H 
+#define ledFX_H
+
 #include "sensoresIR.h"
 #include "WildSide.h"
 #include <Adafruit_NeoPixel.h>
+
 #define LED4 3
 #define LED5 4
 #define LED7 6
@@ -60,15 +62,15 @@ void ledCircleBlink(int r, int g, int b, int time) {  // luzes "andam" em círcu
 
 
 void setDefaultColor(uint8_t r, uint8_t g, uint8_t b) {
-    for (uint8_t i = 0; i < NUMPIXELS; i++) {
-      pixels.setPixelColor(i, pixels.Color(r, g, b));
-    }
+  for (uint8_t i = 0; i < NUMPIXELS; i++) {
+    pixels.setPixelColor(i, pixels.Color(r, g, b));
   }
+}
+
+  
+
 
 void ledDetection() {
-
-  
-  
   setDefaultColor(0, 150, 0); // Define a cor padrão azul para todos os LEDs
   lerSensores();
   if (LeftDetection()) {

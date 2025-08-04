@@ -4,6 +4,16 @@
 #define leftIRpin 35
 #define rightIRpin 34
 
+#define JsumoLeft 33
+#define JsumoRight 32
+
+int leftRay = 0;
+int rightRay = 0;
+
+void lerSensores() {
+  leftRay = digitalRead(JsumoLeft);
+  rightRay = digitalRead(JsumoRight);
+}
 
 bool LeftDetection(){
   bool left_IR_read = digitalRead(leftIRpin);

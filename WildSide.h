@@ -5,12 +5,6 @@
 #include "DRV8833.h"
 #include "SeekAndDestroy.h"
 
-#define JsumoLeft 33
-#define JsumoRight 32
-
-int leftRay = 0;
-int rightRay = 0;
-
 bool EsqAtv, DirAtv;
 bool girando = false;
 
@@ -21,11 +15,6 @@ enum soma {
   Tudo
 };
 
-void lerSensores() {
-  leftRay = digitalRead(JsumoLeft);
-  rightRay = digitalRead(JsumoRight);
-}
-
 void WildSide() {
   lerSensores();
   int reaction = -leftRay + rightRay;
@@ -33,7 +22,7 @@ void WildSide() {
   // Verifica se nenhum objeto foi detectado
   if (reaction == Nada && !girando) {
     // Move para frente
-    motor.move(-900, 900);
+    motor.move(900, 900);
     Serial.println("Avançando...");
   } else {
     // Se algo for detectado, faz as ações já definidas
